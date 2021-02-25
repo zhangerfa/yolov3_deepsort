@@ -19,7 +19,7 @@ from tools import generate_detections as gdet
 from PIL import Image
 from yolov3_tf2.dataset import transform_images
 
-
+'''
 def signLine(SXNum,bmxNum,imgName):
     # 输入实线个数，斑马线个数，通过点击返回实线和斑马线坐标
     # 读入第一帧
@@ -128,7 +128,7 @@ def drawLine(sxPara,bmxPara,img):
         ymin = i[3]
         # 汇出斑马线
         cv2.rectangle(img, (xmax,ymax), (xmin,ymin), (0,255,0), 4)
-        
+'''   
 def initTracker():
     # 初始化追踪器：初始化追踪器并载入权重信息和分类信息    
     # 追踪器参数
@@ -224,12 +224,13 @@ def main(video,SXNum,bmxNum):
     	n+=1
     cv2.imwrite(imgName,image)
     print("第一帧读入成功并保存为"+imgName)
+    '''
     # 用户标记车道分割线和斑马线
     sx,bmx = signLine(SXNum,bmxNum,imgName)
     # 获取标记线段参数
     sxPara,bmxPara = linePara(sx, bmx)
     plt.close()
-    
+    '''
     # 输出视频
     output = r'..\video\output.avi'
     width = int(vidcap.get(cv2.CAP_PROP_FRAME_WIDTH))
@@ -254,11 +255,11 @@ def main(video,SXNum,bmxNum):
         # 行人计数
         converted_boxes = Ped_counts(img,yolo,class_names,tracker,car_num,ped_num)
         # 汇出道路分界线和实线
-        drawLine(sxPara,bmxPara,img)
+        #drawLine(sxPara,bmxPara,img)
         # 展示
         cv2.putText(img, 'carNum:'+str(car_num)+'    '+'PedNum:'+str(ped_num), (0, 30),cv2.FONT_HERSHEY_COMPLEX_SMALL, 1, (0, 0, 255), 2    )
         img = cv2.resize(img,(0,0), fx=1.5,fy=1.5)
-        cv2.imshow("Ped_counts",img)
+        #cv2.imshow("Ped_counts",img)
         
         # 储存该帧
         out.write(img)
@@ -270,16 +271,16 @@ def main(video,SXNum,bmxNum):
                 list_file.write(str(converted_boxes[i][0]) + ' '+str(converted_boxes[i][1]) + ' '+str(converted_boxes[i][2]) + ' '+str(converted_boxes[i][3]) + ' ')
         list_file.write('\n')
         '''
-        if cv2.waitKey(1) & 0xFF == 27: #esc推出
+        #if cv2.waitKey(1) & 0xFF == 27: #esc推出
         # 一帧处理完等待waitkey(毫米)再处理下一帧
-            break
+            #break
         
     
     # 关闭所有窗口
-    vidcap.release()
-    out.release()
-    list_file.close()
-    cv2.destroyAllWindows()
+    #vidcap.release()
+    #out.release()
+    #list_file.close()
+    #cv2.destroyAllWindows()
 
 
 #### 运行主程序
