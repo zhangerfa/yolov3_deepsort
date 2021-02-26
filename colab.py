@@ -313,6 +313,7 @@ def main(_argv):
         #cv2.imshow('output', img)
         if FLAGS.output:
             out.write(img)
+            print('1')
             #frame_index = frame_index + 1X
             list_file.write(str(frame_index)+' ')
             if len(converted_boxes) != 0:
